@@ -1,0 +1,72 @@
+<div class="dashboard">
+    <button class="logout-button" (click)="logout()">Logout</button>
+    <h1>Ebook Management System</h1>
+  
+    <!-- Updated Inventory Table -->
+<h2>Available Inventory</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Quantity</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of inventory">
+      <td>{{ item.title }}</td>
+      <td>{{ item.author }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>
+        <button (click)="viewReviews(item.book_id)">View Reviews</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  
+    <!-- Borrow Book Section -->
+    <h2>Borrow a Book</h2>
+    <form (ngSubmit)="borrowBook()">
+      <select [(ngModel)]="selectedBookId" name="book" required>
+        <option *ngFor="let item of inventory" [value]="item.book_id">
+          {{ item.title }} by {{ item.author }}
+        </option>
+      </select>
+      <input type="date" [(ngModel)]="dueDate" name="dueDate" required />
+      <button type="submit">Borrow</button>
+    </form>
+  
+    <!-- Borrowed Books Section -->
+    <h2>Borrowed Books</h2>
+    <table *ngIf="borrowedBooks.length > 0; else noBorrowedBooks">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Due Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of borrowedBooks">
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.due_date | date }}</td>
+          <td><button (click)="returnBook(book.book_id)">Return</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noBorrowedBooks>
+      <p>No books borrowed.</p>
+    </ng-template>
+  
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <h2>Recommended Books</h2>
+    <app-recommendation *ngIf="userId !== null" [userId]="userId!"></app-recommendation>
+    <!-- Reviews Section -->
+<!-- Reviews Section -->
+<h2 id="reviews">Reviews</h2>
+<app-reviews *ngIf="selectedBookId !== null" [bookId]="selectedBookId!"></app-reviews>
+  </div>

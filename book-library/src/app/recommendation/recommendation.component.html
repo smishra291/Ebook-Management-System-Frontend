@@ -1,0 +1,16 @@
+<div class="recommendation-container">
+    <h2>Recommended Books</h2>
+    <div *ngIf="recommendations.length > 0; else noRecommendations">
+      <ul>
+        <li *ngFor="let rec of recommendations">
+          <strong>{{ rec.title }}</strong> by {{ rec.author }} ({{ rec.year }})
+        </li>
+      </ul>
+    </div>
+    <ng-template #noRecommendations>
+      <p>No recommendations available at the moment.</p>
+    </ng-template>
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </div>

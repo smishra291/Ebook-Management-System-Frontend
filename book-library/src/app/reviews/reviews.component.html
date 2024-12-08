@@ -1,0 +1,38 @@
+<div class="reviews-container">
+    <h3>Reviews for the Selected Book</h3>
+    <div *ngIf="reviews.length > 0; else noReviews">
+      <ul>
+        <li *ngFor="let review of reviews">
+          <strong>{{ review.user_name }}</strong>: {{ review.review_text }}
+          <span class="rating">({{ review.rating }}/5)</span>
+          <p><i>Reviewed on: {{ review.created_at | date }}</i></p>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noReviews>
+      <p>No reviews available for this book or no book selected.</p>
+    </ng-template>
+  </div>
+  
+  <div class="add-review-container">
+    <h4>Write a Review</h4>
+    <form (ngSubmit)="submitReview()">
+      <textarea
+        [(ngModel)]="newReviewText"
+        name="reviewText"
+        rows="3"
+        placeholder="Write your review here..."
+        required
+      ></textarea>
+      <select [(ngModel)]="newReviewRating" name="reviewRating" required>
+        <option [value]="1">1</option>
+        <option [value]="2">2</option>
+        <option [value]="3">3</option>
+        <option [value]="4">4</option>
+        <option [value]="5">5</option>
+      </select>
+      <button type="submit" class="submit-review-btn">Submit Review</button>
+    </form>
+    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </div>

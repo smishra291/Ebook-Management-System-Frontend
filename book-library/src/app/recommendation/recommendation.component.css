@@ -1,0 +1,27 @@
+.recommendation-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    color: #4CAF50;
+    font-family: Arial, sans-serif;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 8px 0;
+    font-size: 16px;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+  }
